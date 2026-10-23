@@ -1,32 +1,28 @@
-# Healthcheck octane for Laravel
+# Healthcheck Octane
 
 [![Tests](https://github.com/eloquage/healthcheck-octane/actions/workflows/run-tests.yml/badge.svg)](https://github.com/eloquage/healthcheck-octane/actions)
-[![Packagist License](https://img.shields.io/badge/Licence-MIT-blue)](http://choosealicense.com/licenses/mit/)
-[![Latest Stable Version](https://img.shields.io/packagist/v/illuma-law/healthcheck-octane?label=Version)](https://packagist.org/packages/illuma-law/healthcheck-octane)
+[![Latest Version](https://img.shields.io/packagist/v/illuma-law/healthcheck-octane)](https://packagist.org/packages/illuma-law/healthcheck-octane)
+[![License](https://img.shields.io/packagist/l/illuma-law/healthcheck-octane)](LICENSE.md)
 
-A focused octane server health check for Spatie's [Laravel Health](https://spatie.be/docs/laravel-health/v1/introduction) package.
+![Octane server healthcheck illustration](art/banner.png)
 
-This package provides a simple, direct health check to verify that your Laravel Octane server (RoadRunner, Swoole, or FrankenPHP) is currently running and responsive.
+A Laravel Health check that runs `octane:status` and reports whether your configured Laravel Octane server is running.
 
-## Features
+## Requirements
 
-- **Server Status Check:** Uses the `octane:status` command to verify if the configured Octane server is active.
-- **Environment Awareness:** Can be configured to automatically skip the check in local or testing environments where Octane might not be running.
-- **Detailed Meta:** Captures the server type and status output for easier monitoring and debugging.
+- PHP 8.3 or later
+- Laravel 12 or 13
+- [Laravel Octane](https://laravel.com/docs/octane) and [Spatie Laravel Health](https://spatie.be/docs/laravel-health)
 
-## Installation
+## Install
 
-Require this package with composer:
-
-```shell
+```bash
 composer require illuma-law/healthcheck-octane
 ```
 
-## Usage & Integration
+## Use
 
-Register the check inside your application's health service provider (e.g. `AppServiceProvider` or a dedicated `HealthServiceProvider`), alongside your other Spatie Laravel Health checks:
-
-### Basic Registration
+Register the check with your Laravel Health checks:
 
 ```php
 use IllumaLaw\HealthCheckOctane\OctaneServerCheck;
@@ -37,22 +33,31 @@ Health::checks([
 ]);
 ```
 
-### Expected Result States
+The check runs `octane:status` using the server set in `config/octane.php`. A running server is healthy. A stopped server is skipped in `local` and `testing`; elsewhere it warns by default.
 
-The check interacts with the Spatie Health dashboard and JSON endpoints using these states:
+## Configuration
 
-- **Ok:** The Octane server is running successfully.
-- **Skipped:** The check is not running in a production-like environment (if configured).
-- **Failed:** The Octane server is stopped or unreachable.
+Publish the package configuration if you want to change the defaults:
 
-## Testing
+```bash
+php artisan vendor:publish --tag=healthcheck-octane-config
+```
 
-Run the test suite:
+In `config/healthcheck-octane.php`:
 
-```shell
+- Set `required` to `true` to fail the health check when Octane is stopped. The default `false` reports a warning.
+- Set `skip_outside_production_like` to `true` to skip a stopped-server result outside production-like environments. The default is `false`.
+
+You can also set `HEALTH_OCTANE_REQUIRED` and `HEALTH_OCTANE_SKIP_OUTSIDE_PRODUCTION` in your environment.
+
+## Tests
+
+```bash
+composer install
 composer test
+composer analyse
 ```
 
 ## License
 
-The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
+MIT. See [LICENSE.md](LICENSE.md).

@@ -34,6 +34,7 @@ it('skips in local/testing when octane server is stopped', function () {
 
 it('fails in production when octane server is stopped', function () {
     app()->detectEnvironment(fn () => 'production');
+    config(['healthcheck-octane.required' => true]);
 
     $mock = Mockery::mock(Kernel::class);
     $mock->shouldReceive('call')->once()->andReturn(1);
@@ -45,4 +46,35 @@ it('fails in production when octane server is stopped', function () {
 
     expect($result->status)->toEqual(Status::failed())
         ->and($result->shortSummary)->toBe('Stopped');
+});
+
+it('warns in production by default when octane server is stopped', function () {
+    app()->detectEnvironment(fn () => 'production');
+
+    $mock = Mockery::mock(Kernel::class);
+    $mock->shouldReceive('call')->once()->andReturn(1);
+    $mock->shouldReceive('output')->once()->andReturn("Octane server is not running.\n");
+    assert($this->app !== null);
+    $this->app->instance(Kernel::class, $mock);
+
+    $result = OctaneServerCheck::new()->run();
+
+    expect($result->status)->toEqual(Status::warning())
+        ->and($result->shortSummary)->toBe('Stopped');
+});
+
+it('skips a stopped server outside production-like environments when configured', function () {
+    app()->detectEnvironment(fn () => 'staging');
+    config(['healthcheck-octane.skip_outside_production_like' => true]);
+
+    $mock = Mockery::mock(Kernel::class);
+    $mock->shouldReceive('call')->once()->andReturn(1);
+    $mock->shouldReceive('output')->once()->andReturn("Octane server is not running.\n");
+    assert($this->app !== null);
+    $this->app->instance(Kernel::class, $mock);
+
+    $result = OctaneServerCheck::new()->run();
+
+    expect($result->status)->toEqual(Status::skipped())
+        ->and($result->shortSummary)->toBe('Skipped');
 });

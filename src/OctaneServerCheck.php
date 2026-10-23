@@ -39,12 +39,16 @@ final class OctaneServerCheck extends Check
             return $result->ok('Octane server is running.');
         }
 
-        if (app()->environment(['local', 'testing']) || (bool) config('health.octane.skip_outside_production_like', false)) {
+        if (app()->environment(['local', 'testing']) || (bool) config('healthcheck-octane.skip_outside_production_like', false)) {
             return (new Result(Status::skipped(), 'Octane server is not running (acceptable in this environment).'))
                 ->meta($meta)
                 ->shortSummary('Skipped');
         }
 
-        return $result->failed('Octane server is not running.');
+        if ((bool) config('healthcheck-octane.required', false)) {
+            return $result->failed('Octane server is not running.');
+        }
+
+        return $result->warning('Octane server is not running.');
     }
 }
