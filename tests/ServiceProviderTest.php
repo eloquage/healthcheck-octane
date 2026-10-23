@@ -6,7 +6,7 @@ use IllumaLaw\HealthCheckOctane\HealthcheckOctaneServiceProvider;
 use Illuminate\Support\ServiceProvider;
 
 it('registers the config publish path under the correct tag', function () {
-    $provider = app()->getProvider(IllumaLaw\HealthCheckOctane\HealthcheckOctaneServiceProvider::class);
+    $provider = app()->getProvider(HealthcheckOctaneServiceProvider::class);
     $source = dirname((new ReflectionClass($provider))->getFileName()).'/../config/healthcheck-octane.php';
 
     expect(ServiceProvider::pathsToPublish($provider::class, 'healthcheck-octane-config'))
