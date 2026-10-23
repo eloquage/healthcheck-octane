@@ -16,7 +16,8 @@ final class OctaneServerCheck extends Check
 {
     public function run(): Result
     {
-        $server = (string) config('octane.server', 'roadrunner');
+        $configuredServer = config('octane.server', 'roadrunner');
+        $server = is_string($configuredServer) ? $configuredServer : 'roadrunner';
 
         $exitCode = Artisan::call('octane:status', [
             '--server' => $server,

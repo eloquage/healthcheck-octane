@@ -10,6 +10,7 @@ it('succeeds when octane server is running', function () {
     $mock = Mockery::mock(Kernel::class);
     $mock->shouldReceive('call')->once()->andReturn(0);
     $mock->shouldReceive('output')->once()->andReturn("Octane server is running.\n");
+    assert($this->app !== null);
     $this->app->instance(Kernel::class, $mock);
 
     $result = OctaneServerCheck::new()->run();
@@ -22,6 +23,7 @@ it('skips in local/testing when octane server is stopped', function () {
     $mock = Mockery::mock(Kernel::class);
     $mock->shouldReceive('call')->once()->andReturn(1);
     $mock->shouldReceive('output')->once()->andReturn("Octane server is not running.\n");
+    assert($this->app !== null);
     $this->app->instance(Kernel::class, $mock);
 
     $result = OctaneServerCheck::new()->run();
@@ -36,6 +38,7 @@ it('fails in production when octane server is stopped', function () {
     $mock = Mockery::mock(Kernel::class);
     $mock->shouldReceive('call')->once()->andReturn(1);
     $mock->shouldReceive('output')->once()->andReturn("Octane server is not running.\n");
+    assert($this->app !== null);
     $this->app->instance(Kernel::class, $mock);
 
     $result = OctaneServerCheck::new()->run();
