@@ -1,6 +1,6 @@
 # Healthcheck octane for Laravel
 
-[![Tests](https://github.com/illuma-law/healthcheck-octane/actions/workflows/run-tests.yml/badge.svg)](https://github.com/illuma-law/healthcheck-octane/actions)
+[![Tests](https://github.com/eloquage/healthcheck-octane/actions/workflows/run-tests.yml/badge.svg)](https://github.com/eloquage/healthcheck-octane/actions)
 [![Packagist License](https://img.shields.io/badge/Licence-MIT-blue)](http://choosealicense.com/licenses/mit/)
 [![Latest Stable Version](https://img.shields.io/packagist/v/illuma-law/healthcheck-octane?label=Version)](https://packagist.org/packages/illuma-law/healthcheck-octane)
 
