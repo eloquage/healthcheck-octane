@@ -1,16 +1,15 @@
 # illuma-law/healthcheck-octane
 
-Checks if the `vector` extension (octane) is enabled and active in PostgreSQL.
+Checks whether the configured Laravel Octane server is running by calling `octane:status`.
 
 ## Usage
 
 ```php
-use IllumaLaw\HealthCheckOctane\OctaneExtensionCheck;
+use IllumaLaw\HealthCheckOctane\OctaneServerCheck;
 use Spatie\Health\Facades\Health;
 
 Health::checks([
-    OctaneExtensionCheck::new()
-        ->required(true), // If true, FAIL if missing. If false, WARNING.
+    OctaneServerCheck::new(),
 ]);
 ```
 
@@ -19,4 +18,5 @@ Health::checks([
 Publish config: `php artisan vendor:publish --tag="healthcheck-octane-config"`
 
 Options in `config/healthcheck-octane.php`:
-- `required`: (bool) Global default for strictness.
+- `required`: fail the health check when Octane is stopped; otherwise report a warning.
+- `skip_outside_production_like`: skip a stopped-server result outside production-like environments.
