@@ -2,7 +2,7 @@
     "name": "eloquage/healthcheck-octane",
     "description": "Focused octane server health check for Spatie's Laravel Health package.",
     "keywords": [
-        "illuma-law",
+        "eloquage",
         "laravel",
         "health",
         "octane"
@@ -11,8 +11,7 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "illuma-law",
-            "email": "support@illuma.law",
+            "name": "Eloquage",
             "role": "Developer"
         }
     ],
