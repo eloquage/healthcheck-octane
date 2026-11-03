@@ -1,5 +1,5 @@
 {
-    "name": "illuma-law/healthcheck-octane",
+    "name": "eloquage/healthcheck-octane",
     "description": "Focused octane server health check for Spatie's Laravel Health package.",
     "keywords": [
         "illuma-law",

@@ -7,7 +7,7 @@ metadata:
 
 # Laravel package development
 
-Use this skill when changing this Composer package: `illuma-law/healthcheck-octane` — Focused octane server health check for Spatie's Laravel Health package.
+Use this skill when changing this Composer package: `eloquage/healthcheck-octane` — Focused octane server health check for Spatie's Laravel Health package.
 
 ## Package context
 
