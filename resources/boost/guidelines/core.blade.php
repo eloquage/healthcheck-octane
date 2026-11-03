@@ -1,4 +1,4 @@
-# illuma-law/healthcheck-octane
+# eloquage/healthcheck-octane
 
 Checks whether the configured Laravel Octane server is running by calling `octane:status`.
 

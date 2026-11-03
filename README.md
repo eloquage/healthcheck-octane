@@ -1,8 +1,8 @@
 # Healthcheck Octane
 
 [![Tests](https://github.com/eloquage/healthcheck-octane/actions/workflows/run-tests.yml/badge.svg)](https://github.com/eloquage/healthcheck-octane/actions)
-[![Latest Version](https://img.shields.io/packagist/v/illuma-law/healthcheck-octane)](https://packagist.org/packages/illuma-law/healthcheck-octane)
-[![License](https://img.shields.io/packagist/l/illuma-law/healthcheck-octane)](LICENSE.md)
+[![Latest Version](https://img.shields.io/packagist/v/eloquage/healthcheck-octane)](https://packagist.org/packages/eloquage/healthcheck-octane)
+[![License](https://img.shields.io/packagist/l/eloquage/healthcheck-octane)](LICENSE.md)
 
 ![Octane server healthcheck illustration](art/banner.png)
 
@@ -17,7 +17,7 @@ A Laravel Health check that runs `octane:status` and reports whether your config
 ## Install
 
 ```bash
-composer require illuma-law/healthcheck-octane
+composer require eloquage/healthcheck-octane
 ```
 
 ## Use
